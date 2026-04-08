@@ -38,6 +38,33 @@ Use this structure for the final review.
 3. <third-highest-value fix>
 ```
 
+For detailed commit, diff, PR/MR, or chunk-merged reviews, this expanded format is also valid:
+
+```md
+## Summary
+- Brief description of what changed
+- Overall assessment in one sentence
+
+## Findings
+...
+
+## Weighted Scorecard
+- Correctness and robustness: XX/40
+- Security and risk exposure: XX/30
+- Best practices and maintainability: XX/20
+- Performance and resource efficiency: XX/5
+- Commit-message clarity and reviewability: XX/5
+
+## Total Score
+- Chinese output: 总分:XX分
+- English output: Total Score: XX/100
+
+## Top Recommendations
+1. ...
+2. ...
+3. ...
+```
+
 ## Rules
 
 - If a severity level has no findings, omit that section.

@@ -34,6 +34,11 @@ Read [references/input-modes.md](references/input-modes.md), then load the match
 
 Always apply the baseline checklist in [references/review-checklist.md](references/review-checklist.md), the scoring rules in [references/scoring.md](references/scoring.md), and the output contract in [references/output-format.md](references/output-format.md).
 Also follow [references/language-and-localization.md](references/language-and-localization.md) for output language and [references/cross-platform.md](references/cross-platform.md) for script portability expectations.
+When you need a stronger, opinionated review posture derived from the original platform prompts, also read:
+- [references/default-review-profile.md](references/default-review-profile.md)
+- [references/review-styles.md](references/review-styles.md)
+- [references/batch-summary-protocol.md](references/batch-summary-protocol.md)
+- [references/customization.md](references/customization.md)
 
 ## Review workflow
 
@@ -45,7 +50,7 @@ Also follow [references/language-and-localization.md](references/language-and-lo
    - `scripts/split_diff.py` to split the diff into smaller chunks
 5. Review each chunk for correctness, security, maintainability, performance, testing, and operational risk.
 6. If multiple chunk-level reviews exist, use `scripts/summarize_findings.py` or equivalent reasoning to merge them.
-7. Score the change using [references/scoring.md](references/scoring.md).
+7. Score the change using [references/scoring.md](references/scoring.md). If the user asks for a detailed scorecard or if the review is chunked, prefer the weighted 100-point profile.
 8. Format the answer exactly as defined in [references/output-format.md](references/output-format.md).
 9. Match the user's language unless they request a different one explicitly.
 
