@@ -17,6 +17,9 @@ The helper scripts in `scripts/` are implemented in Python and use only the stan
 - `normalize_diff.py`
 - `split_diff.py`
 - `summarize_findings.py`
+- `discover_constraints.py`
+- `resolve_effective_constraints.py`
+- `infer_design_constraints.py`
 
 That makes them broadly portable as long as Python 3 is available.
 

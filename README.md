@@ -2,6 +2,10 @@
 
 Standalone skill repository for structured code review workflows.
 
+Language support:
+- English and Chinese review output are supported
+- the skill defaults to the user's language
+
 Main skill path:
 - `skills/code-reviewer/`
 

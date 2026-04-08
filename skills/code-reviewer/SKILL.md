@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Review code snippets, files, diffs, commits, and PR/MR changes for correctness, security, maintainability, performance, testing, and best practices. Use when the user asks for code review, diff review, commit review, PR review, MR review, or security-focused review.
+description: Review code snippets, files, diffs, commits, PR/MR changes, architecture and standards violations, and design drift from existing code conventions. Use when the user asks for code review, diff review, commit review, PR review, MR review, architecture review, standards review, design review, or security-focused review.
 ---
 
 # Code Reviewer
