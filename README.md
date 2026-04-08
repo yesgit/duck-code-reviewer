@@ -20,6 +20,7 @@ Release notes for the current version:
 - supports snippet, diff, commit, PR, and MR review flows
 - includes security-focused review guidance
 - includes optional GitHub PR and GitLab MR review references
+- includes architecture, design, and standards review with hierarchical rule precedence
 - ships portable Python helper scripts for diff normalization, splitting, and summary preparation
 
 ## Install
@@ -44,6 +45,7 @@ After installation, the skill path should look like:
 - commits
 - pull requests and merge requests
 - security-focused changes
+- architecture, design, and standards violations
 
 ## Output Style
 
@@ -98,6 +100,12 @@ Use $code-reviewer to do a security-focused review of this code in English:
 
 def run(cmd):
     os.system(cmd)
+```
+
+Architecture and standards review:
+
+```text
+Use $code-reviewer to review whether this diff violates project architecture or local directory rules. Check README.md, docs/, CLAUDE.md, AGENTS.md, .cursorrules, and .cursor/rules/ with nearest-directory rules overriding parent defaults.
 ```
 
 ## Examples

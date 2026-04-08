@@ -1,0 +1,19 @@
+Use $code-reviewer to review whether this change violates project architecture, design, or local coding rules.
+
+Before reviewing the code, inspect rule sources in:
+- README.md
+- docs/ and doc/
+- CLAUDE.md
+- AGENTS.md
+- .cursorrules
+- .cursor/rules/
+
+Apply nearest-directory rules first. More local rules override parent defaults, but mandatory rules should not be silently overridden.
+
+Then review the diff and report:
+- violated rule
+- rule source file
+- effective scope
+- conflicting code
+- severity
+- recommendation

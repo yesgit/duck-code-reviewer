@@ -12,6 +12,7 @@ Use this skill when the user asks to:
 - review a git diff or patch
 - review a commit
 - review a pull request or merge request
+- review architecture, design, or coding-standard violations
 - focus on security, correctness, maintainability, performance, or testing risks
 
 ## Input classification
@@ -30,6 +31,7 @@ Read [references/input-modes.md](references/input-modes.md), then load the match
 - PR or MR: [references/pr-mr-review.md](references/pr-mr-review.md)
 - GitHub pull request with repo metadata or `gh` context: [references/github-pr-review.md](references/github-pr-review.md)
 - GitLab merge request with repo metadata or `glab` context: [references/gitlab-mr-review.md](references/gitlab-mr-review.md)
+- architecture, design, or standards review: [references/architecture-review.md](references/architecture-review.md)
 - security-focused request: [references/security-review.md](references/security-review.md)
 
 Always apply the baseline checklist in [references/review-checklist.md](references/review-checklist.md), the scoring rules in [references/scoring.md](references/scoring.md), and the output contract in [references/output-format.md](references/output-format.md).
@@ -39,6 +41,11 @@ When you need a stronger, opinionated review posture derived from the original p
 - [references/review-styles.md](references/review-styles.md)
 - [references/batch-summary-protocol.md](references/batch-summary-protocol.md)
 - [references/customization.md](references/customization.md)
+For architecture and standards review, also read:
+- [references/constraint-sources.md](references/constraint-sources.md)
+- [references/ai-tooling-rules.md](references/ai-tooling-rules.md)
+- [references/rule-precedence.md](references/rule-precedence.md)
+- [references/violation-severity.md](references/violation-severity.md)
 
 ## Review workflow
 
@@ -48,6 +55,8 @@ When you need a stronger, opinionated review posture derived from the original p
 4. If the diff is noisy or too large, use:
    - `scripts/normalize_diff.py` to remove low-value noise
    - `scripts/split_diff.py` to split the diff into smaller chunks
+   - `scripts/discover_constraints.py` to locate architecture and policy files
+   - `scripts/resolve_effective_constraints.py` to determine which rules apply to a target path
 5. Review each chunk for correctness, security, maintainability, performance, testing, and operational risk.
 6. If multiple chunk-level reviews exist, use `scripts/summarize_findings.py` or equivalent reasoning to merge them.
 7. Score the change using [references/scoring.md](references/scoring.md). If the user asks for a detailed scorecard or if the review is chunked, prefer the weighted 100-point profile.
