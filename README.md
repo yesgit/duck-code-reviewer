@@ -21,6 +21,7 @@ Release notes for the current version:
 - includes security-focused review guidance
 - includes optional GitHub PR and GitLab MR review references
 - includes architecture, design, and standards review with hierarchical rule precedence
+- includes baseline design inference from existing code when explicit docs are incomplete
 - ships portable Python helper scripts for diff normalization, splitting, and summary preparation
 
 ## Install
@@ -46,6 +47,7 @@ After installation, the skill path should look like:
 - pull requests and merge requests
 - security-focused changes
 - architecture, design, and standards violations
+- drift from existing implicit design conventions
 
 ## Output Style
 
@@ -106,6 +108,12 @@ Architecture and standards review:
 
 ```text
 Use $code-reviewer to review whether this diff violates project architecture or local directory rules. Check README.md, docs/, CLAUDE.md, AGENTS.md, .cursorrules, and .cursor/rules/ with nearest-directory rules overriding parent defaults.
+```
+
+Design inference review:
+
+```text
+Use $code-reviewer to infer the existing design conventions from the old codebase, then check whether this new code or diff drifts from those established patterns.
 ```
 
 ## Examples

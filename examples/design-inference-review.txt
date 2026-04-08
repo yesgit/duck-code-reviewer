@@ -1,0 +1,12 @@
+Use $code-reviewer to infer the current design conventions from the existing codebase, then review whether this change drifts from those conventions.
+
+When explicit docs are incomplete:
+- inspect old code structure
+- infer layering, file placement, import direction, and test layout
+- treat inferred patterns as weaker than explicit documented rules
+
+Then report:
+- explicit rules, if any
+- inferred baseline patterns
+- where the new code deviates
+- whether the deviation is acceptable, risky, or likely a design violation

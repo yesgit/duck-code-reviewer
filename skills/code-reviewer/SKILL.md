@@ -32,6 +32,7 @@ Read [references/input-modes.md](references/input-modes.md), then load the match
 - GitHub pull request with repo metadata or `gh` context: [references/github-pr-review.md](references/github-pr-review.md)
 - GitLab merge request with repo metadata or `glab` context: [references/gitlab-mr-review.md](references/gitlab-mr-review.md)
 - architecture, design, or standards review: [references/architecture-review.md](references/architecture-review.md)
+- design inference from existing code: [references/design-inference-review.md](references/design-inference-review.md)
 - security-focused request: [references/security-review.md](references/security-review.md)
 
 Always apply the baseline checklist in [references/review-checklist.md](references/review-checklist.md), the scoring rules in [references/scoring.md](references/scoring.md), and the output contract in [references/output-format.md](references/output-format.md).
@@ -46,6 +47,8 @@ For architecture and standards review, also read:
 - [references/ai-tooling-rules.md](references/ai-tooling-rules.md)
 - [references/rule-precedence.md](references/rule-precedence.md)
 - [references/violation-severity.md](references/violation-severity.md)
+- [references/codebase-baseline.md](references/codebase-baseline.md)
+- [references/design-inference-review.md](references/design-inference-review.md)
 
 ## Review workflow
 
@@ -57,6 +60,7 @@ For architecture and standards review, also read:
    - `scripts/split_diff.py` to split the diff into smaller chunks
    - `scripts/discover_constraints.py` to locate architecture and policy files
    - `scripts/resolve_effective_constraints.py` to determine which rules apply to a target path
+   - `scripts/infer_design_constraints.py` to infer baseline patterns from existing code when explicit docs are incomplete
 5. Review each chunk for correctness, security, maintainability, performance, testing, and operational risk.
 6. If multiple chunk-level reviews exist, use `scripts/summarize_findings.py` or equivalent reasoning to merge them.
 7. Score the change using [references/scoring.md](references/scoring.md). If the user asks for a detailed scorecard or if the review is chunked, prefer the weighted 100-point profile.
