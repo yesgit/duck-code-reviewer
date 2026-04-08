@@ -1,0 +1,7 @@
+interface:
+  display_name: "Code Reviewer"
+  short_description: "Structured review for code, diff, commit, and PR/MR changes"
+  default_prompt: "Use $code-reviewer to review this diff, commit, or PR/MR for correctness, security, maintainability, testing, and risk."
+
+policy:
+  allow_implicit_invocation: true
