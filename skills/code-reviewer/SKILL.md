@@ -71,7 +71,7 @@ Every review should include:
 - findings grouped by severity: high, medium, low, info
 - for each finding: location, issue, impact, recommendation
 - an overall risk assessment
-- a score from 1 to 10
+- a score, using `1-10` for lightweight reviews or the weighted `0-100` scorecard when appropriate
 - the top 3 recommendations
 
 If there are no material findings, state that explicitly and mention any residual uncertainty or test coverage gaps.

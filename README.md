@@ -102,7 +102,7 @@ def run(cmd):
 
 ## Examples
 
-See [`examples/`](/Users/hedawei/Projects/code-reviewer-skill/examples) for small test inputs you can paste directly into a prompt.
+See [`examples/`](./examples/) for small test inputs you can paste directly into a prompt.
 
 ## Repository Layout
 
