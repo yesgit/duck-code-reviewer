@@ -1,4 +1,4 @@
-Use $DuckDuckReviewer to review this commit in Chinese. Use the weighted scorecard.
+Use $DuckCodeReviewer to review this commit in Chinese. Use the weighted scorecard.
 
 Commit message:
 fix: handle missing username during login

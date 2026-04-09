@@ -1,9 +1,9 @@
 ---
-name: DuckDuckReviewer
+name: DuckCodeReviewer
 description: Review code snippets, files, diffs, commits, PR/MR changes, architecture and standards violations, and design drift from existing code conventions. Use when the user asks for code review, diff review, commit review, PR review, MR review, architecture review, standards review, design review, or security-focused review.
 ---
 
-# DuckDuckReviewer
+# DuckCodeReviewer
 
 ## When to use
 
