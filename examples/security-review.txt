@@ -1,4 +1,4 @@
-Use $yesgit-reviewer to do a security-focused review of this code in English:
+Use $DuckDuckReviewer to do a security-focused review of this code in English:
 
 import os
 

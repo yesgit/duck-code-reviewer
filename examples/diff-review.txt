@@ -1,4 +1,4 @@
-Use $yesgit-reviewer to review this diff in Chinese:
+Use $DuckDuckReviewer to review this diff in Chinese:
 
 diff --git a/app.py b/app.py
 --- a/app.py
