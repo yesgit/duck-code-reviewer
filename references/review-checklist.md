@@ -25,6 +25,7 @@ Apply this baseline checklist to every review.
 - Is logic duplicated unnecessarily?
 - Does the change increase coupling or hidden side effects?
 - Is there enough local explanation for non-obvious logic?
+- Does the change violate applicable project style, lint, formatter, or editor configuration in a way that harms readability or maintainability?
 
 ## Performance
 
@@ -52,3 +53,5 @@ Apply this baseline checklist to every review.
 - Prioritize material risks over nits.
 - Prefer fewer, stronger findings.
 - Separate confirmed defects from plausible concerns.
+- Treat repository-local style configuration as stronger than generic best-practice preferences.
+- Treat generic ecosystem style guidance as advisory unless the repository explicitly adopts it.

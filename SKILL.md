@@ -51,6 +51,7 @@ For architecture and standards review, also read:
 - [references/design-inference-review.md](references/design-inference-review.md)
 Treat explicit documented rules as stronger than inferred repository conventions.
 When discovering rule sources, prioritize readable text-based policy files rather than arbitrary artifacts.
+Treat project style and formatter or linter configuration files as explicit rule sources when they are readable and path-applicable.
 
 ## Review workflow
 
@@ -67,13 +68,15 @@ When discovering rule sources, prioritize readable text-based policy files rathe
    - `scripts/discover_constraints.py` to locate readable architecture and policy files
    - `scripts/resolve_effective_constraints.py` to determine which explicit rules apply to a target path
    - `scripts/infer_design_constraints.py` to infer baseline patterns from existing code only when explicit docs are incomplete
-6. For multi-agent review, split work into disjoint chunks by file groups, directories, or concern areas. Keep each chunk self-contained enough that one reviewer can inspect it without depending heavily on another chunk.
-7. Give every subagent the same review objective, applicable constraints, and required output contract. Each subagent should report only concrete findings for its assigned chunk and should not attempt to produce the final merged review.
-8. Review each chunk for correctness, security, maintainability, performance, testing, and operational risk.
-9. If multiple chunk-level reviews exist, use `scripts/summarize_findings.py` or equivalent reasoning to merge them. Follow [references/batch-summary-protocol.md](references/batch-summary-protocol.md) when merging chunk or subagent results.
-10. Score the change using [references/scoring.md](references/scoring.md). If the user asks for a detailed scorecard or if the review is chunked, prefer the weighted 100-point profile.
-11. Format the answer exactly as defined in [references/output-format.md](references/output-format.md).
-12. Match the user's language unless they request a different one explicitly.
+6. During constraint discovery, explicitly check for project-local style, lint, formatter, and editor configuration that applies to the changed paths.
+7. If such configuration exists, review against it before falling back to inferred repository conventions or generic ecosystem defaults.
+8. For multi-agent review, split work into disjoint chunks by file groups, directories, or concern areas. Keep each chunk self-contained enough that one reviewer can inspect it without depending heavily on another chunk.
+9. Give every subagent the same review objective, applicable constraints, and required output contract. Each subagent should report only concrete findings for its assigned chunk and should not attempt to produce the final merged review.
+10. Review each chunk for correctness, security, maintainability, performance, testing, and operational risk.
+11. If multiple chunk-level reviews exist, use `scripts/summarize_findings.py` or equivalent reasoning to merge them. Follow [references/batch-summary-protocol.md](references/batch-summary-protocol.md) when merging chunk or subagent results.
+12. Score the change using [references/scoring.md](references/scoring.md). If the user asks for a detailed scorecard or if the review is chunked, prefer the weighted 100-point profile.
+13. Format the answer exactly as defined in [references/output-format.md](references/output-format.md).
+14. Match the user's language unless they request a different one explicitly.
 
 ## Multi-agent rules
 
@@ -95,6 +98,8 @@ When discovering rule sources, prioritize readable text-based policy files rathe
 - Distinguish confirmed bugs from uncertain risks.
 - Call out missing tests when behavior changes are not covered.
 - Avoid style-only nitpicks unless they affect readability, correctness, or maintainability.
+- Prefer repository-local style and lint configuration over generic language-community preferences.
+- If no project-specific style rule exists, you may cite widely adopted ecosystem defaults as advisory guidance only, not as hard violations.
 - If the context is insufficient, say what is missing and how that limits confidence.
 - For security-focused reviews, prioritize exploitable issues and unsafe defaults.
 - For architecture and design reviews, prefer explicit policy sources over inferred codebase patterns.

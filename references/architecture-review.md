@@ -10,6 +10,7 @@ Use this guide when the user asks whether code violates:
 ## Goal
 
 Determine whether the change is inconsistent with the project's documented architecture or local directory-specific rules.
+This includes effective style, lint, formatter, and editor rules when the user asks about standards or coding conventions.
 
 ## Review model
 
@@ -36,6 +37,7 @@ Use:
 - layering violations
 - module-boundary violations
 - naming or file-placement rules
+- style, formatting, or lint rules that are explicitly configured for the affected path
 - testing requirements
 - generated-file modification bans
 - API or workflow constraints defined in docs
