@@ -45,6 +45,15 @@ LAYER_PATTERNS = {
         re.compile(r"[./](domain|models?|entities?)[./]"),
     ],
 }
+INLINE_IMPORT_PATTERNS = [
+    re.compile(r"^\s*import\s+.+$"),
+    re.compile(r"^\s*from\s+\S+\s+import\s+.+$"),
+    re.compile(r"^\s*(?:const|let|var)\s+.+?=\s*require\(.+\)"),
+    re.compile(r"^\s*require(?:_relative)?\(.+\)"),
+    re.compile(r"^\s*use\s+.+;$"),
+    re.compile(r"^\s*using\s+.+;$"),
+]
+QUOTED_IMPORT_LINE_RE = re.compile(r'^\s*"[^"]+"\s*$')
 
 
 def iter_source_files(root: Path) -> Iterable[Path]:
@@ -81,11 +90,21 @@ def collect_imports(path: Path) -> List[str]:
     except Exception:
         return imports
 
+    in_go_import_block = False
     for line in text.splitlines():
         stripped = line.strip()
-        if stripped.startswith("import "):
-            imports.append(stripped)
-        elif stripped.startswith("from "):
+        if stripped.startswith("import ("):
+            in_go_import_block = True
+            continue
+        if in_go_import_block:
+            if stripped == ")":
+                in_go_import_block = False
+                continue
+            if QUOTED_IMPORT_LINE_RE.match(stripped):
+                imports.append(stripped)
+            continue
+
+        if any(pattern.match(stripped) for pattern in INLINE_IMPORT_PATTERNS):
             imports.append(stripped)
     return imports
 
@@ -121,6 +140,7 @@ def infer(root: Path) -> Dict[str, object]:
         "notes": [
             "These are inferred conventions, not explicit documented rules.",
             "Use them as baseline signals when explicit design documents are missing or incomplete.",
+            "Import tendencies are heuristic and depend on recognizable import syntax.",
         ],
     }
 

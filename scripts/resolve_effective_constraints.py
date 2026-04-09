@@ -4,29 +4,11 @@
 from __future__ import annotations
 
 import argparse
-import fnmatch
 import json
 from pathlib import Path
 from typing import List
 
-
-FILENAMES = {
-    "README.md",
-    "README.txt",
-    "ARCHITECTURE.md",
-    "DESIGN.md",
-    "CONTRIBUTING.md",
-    "STYLEGUIDE.md",
-    "CLAUDE.md",
-    "AGENTS.md",
-    ".cursorrules",
-}
-TEXT_EXTENSIONS = {".md", ".mdx", ".txt", ".rst", ".adoc", ".yaml", ".yml", ".json", ".toml"}
-SCOPED_DIR_NAMES = {"docs", "doc", "design", "architecture", "spec", "standards", "policies", "rules", "instructions"}
-
-
-def is_text_rule_file(path: Path) -> bool:
-    return path.is_file() and path.suffix.lower() in TEXT_EXTENSIONS
+from constraint_rules import DOCUMENT_RULE_FILENAMES, DOCUMENT_RULE_GLOBS, SCOPED_DIR_NAMES, is_text_rule_file
 
 
 def collect_scoped_rule_files(repo_root: Path, cursor: Path) -> List[Path]:
@@ -36,6 +18,22 @@ def collect_scoped_rule_files(repo_root: Path, cursor: Path) -> List[Path]:
         if scoped_dir.is_dir():
             for candidate in sorted(p for p in scoped_dir.rglob("*") if is_text_rule_file(p)):
                 candidates.append(candidate)
+    return candidates
+
+
+def collect_named_rule_files(cursor: Path) -> List[Path]:
+    candidates: List[Path] = []
+    seen: set[Path] = set()
+    for name in sorted(DOCUMENT_RULE_FILENAMES):
+        candidate = cursor / name
+        if candidate.is_file() and candidate not in seen:
+            candidates.append(candidate)
+            seen.add(candidate)
+    for pattern in sorted(DOCUMENT_RULE_GLOBS):
+        for candidate in sorted(cursor.glob(pattern)):
+            if candidate.is_file() and candidate not in seen:
+                candidates.append(candidate)
+                seen.add(candidate)
     return candidates
 
 
@@ -50,16 +48,14 @@ def collect_candidates(root: Path, current: Path) -> List[dict]:
         cursor = path
 
     while True:
-        for name in sorted(FILENAMES):
-            candidate = cursor / name
-            if candidate.is_file():
-                results.append(
-                    {
-                        "path": candidate.relative_to(repo_root).as_posix(),
-                        "scope_path": cursor.relative_to(repo_root).as_posix() or ".",
-                        "precedence": len(results) + 1,
-                    }
-                )
+        for candidate in collect_named_rule_files(cursor):
+            results.append(
+                {
+                    "path": candidate.relative_to(repo_root).as_posix(),
+                    "scope_path": cursor.relative_to(repo_root).as_posix() or ".",
+                    "precedence": len(results) + 1,
+                }
+            )
 
         for candidate in collect_scoped_rule_files(repo_root, cursor):
             results.append(
